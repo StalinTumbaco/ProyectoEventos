@@ -9,6 +9,12 @@
 
     <nav>
         <ul>
+            <li>
+                <a href="/usuarios/login">Iniciar sesion</a>
+            </li>
+            <li>
+                <a href="/usuarios/registro">Registrarse</a>
+            </li>
             {% if user.is_authenticated %}
             <li>
                 <a href="/usuarios/logout">Cerrar sesion</a>

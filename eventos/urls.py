@@ -3,4 +3,5 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='home'),  # Ruta para la página de inicio de la app eventos
+    path('eventos/', views.eventos, name='eventos')
 ]

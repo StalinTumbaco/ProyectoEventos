@@ -1,0 +1,15 @@
+{% block content %}
+<h1>Eventos</h1>
+
+<ul>
+    {% for Evento in eventos %}
+    <li>
+        <h1>{{Evento.tipo_de_evento}}</h1>
+        <p>{{Evento.valor_referencial}}</p>
+        <p>{{Evento.numero_horas_permitidas}}</p>
+    </li>
+    {% endfor %}
+</ul>
+
+
+{% endblock %}
