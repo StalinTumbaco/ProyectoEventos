@@ -24,5 +24,4 @@ urlpatterns = [
     #path('alquileres/', include('alquileres.urls')),  # Incluye las URLs de la app 'alquileres'
     path('usuarios/', include('usuarios.urls')),  # Incluye las URLs de la app 'usuarios'
     #path('servicios/', include('servicios.urls')),  # Incluye las URLs de la app 'servicios'
-    path('logout/', views.cerrar_sesion, name='logout'),
 ]
