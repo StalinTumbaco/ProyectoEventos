@@ -1,0 +1,9 @@
+<form method="post">
+    {% csrf_token %}
+    <label for="codigo">Ingresa el código enviado a tu correo:</label>
+    <input type="text" id="codigo" name="codigo" required>
+    <button type="submit">Verificar</button>
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+</form>

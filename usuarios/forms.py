@@ -11,6 +11,7 @@ class RegistroForm(UserCreationForm):
             'last_name',         # Apellido
             'identificacion_cliente',  # Identificación
             'telefono',          # Teléfono
+            'email',             #correoelectronico
             'nacionalidad',      # Nacionalidad (país)
             'genero',            # Género
         ]
