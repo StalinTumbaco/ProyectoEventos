@@ -139,5 +139,5 @@ EMAIL_HOST = 'smtp.gmail.com'  # Cambia según el proveedor
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'spaceeventspagweb@gmail.com'  # Tu correo electrónico
-EMAIL_HOST_PASSWORD = 'hprz lesc ntjp njis'  # Tu contraseña o token de app
+EMAIL_HOST_PASSWORD = 'hprz lesc ntjp njis'  # Tu contraseña de aplicaciones
 DEFAULT_FROM_EMAIL = 'spaceeventspagweb@gmail.com'

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.core.mail import send_mail
 from django.conf import settings
 from django.utils.crypto import get_random_string
@@ -99,3 +99,7 @@ def login_view(request):
             messages.error(request, 'Nombre de usuario, correo o contraseña incorrectos.')
 
     return render(request, 'login.html')
+
+def cerrar_sesion (request):
+    logout(request)
+    return redirect ('home')
