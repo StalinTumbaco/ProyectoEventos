@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Evento
+from .models import Evento, TipoDeEvento
 
 # Create your views here.
 def home (request):
@@ -7,4 +7,5 @@ def home (request):
 
 def eventos (request):
     events = Evento.objects.all()
-    return render(request, 'eventos.html', {'eventos': events})
+    tipevents = TipoDeEvento.objects.all()
+    return render(request, 'eventos.html', {'tipo_eventos': tipevents, 'eventos': events})

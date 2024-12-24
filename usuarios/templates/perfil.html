@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+{% csrf_token %}
+<div class="container my-3">
+    <div class="row">
+        <div class="col-md-4">
+            <!-- CARD DATOS DEL PERFIL -->
+             <div class="card border rounded-2 shadow p-3 mb-3">
+                <div class="card-body">
+                    <h1>{{Usuario.username}}</h1>
+                    <h2>{{Usuario.first_name}}  {{Usuario.last_name}}</h2>
+                    <p><strong>Cedula de identidad: </strong>{{Usuario.identificacion_cliente}}</p>
+                    <p><strong>Nacionalidad: </strong>{{Usuario.nacionalidad}}</p>
+                    <p><strong>Correo electronico: </strong>{{Usuario.email}}</p>
+                    <p><strong>Telefono: </strong>{{Usuario.telefono}}</p>
+                    <hr>
+                    <a class="btn btn-outline-secondary" href="">Editar Perfil</a>
+                </div>
+             </div>
+        </div>
+        <div class="col-md-8">
+            <!-- CARD Variable -->
+        </div>
+    </div>
+</div>
+{% endblock %}

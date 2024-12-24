@@ -10,7 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+from cloudinary import CloudinaryImage
+from cloudinary import CloudinaryVideo
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -41,7 +47,9 @@ INSTALLED_APPS = [
     'eventos',
     'alquileres',
     'usuarios',
-    'servicios'
+    'servicios',
+    'cloudinary', #almacenamiento de fotos
+    'cloudinary_storage', #almacenamiento de fotos
 ]
 
 AUTH_USER_MODEL = 'usuarios.Usuario'
@@ -129,6 +137,14 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_DIR = [os.path.join(BASE_DIR, 'static')]
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
@@ -142,3 +158,17 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'spaceeventspagweb@gmail.com'  # Tu correo electrónico
 EMAIL_HOST_PASSWORD = 'hprz lesc ntjp njis'  # Tu contraseña de aplicaciones
 DEFAULT_FROM_EMAIL = 'spaceeventspagweb@gmail.com'
+
+#Jazzmin para el admin
+JAZZMIN_SETTINGS = {
+    'site_header' : "Cirx",
+    'site_brand' : "Te acompañamos en tus mejores momentos",
+    'copyright' : "Cirx.com",
+}
+
+#Configuracion de Cloudinary
+cloudinary.config(
+    cloud_name = "imagecloudlkr",
+    api_key = "959667655699661",            #abierto a mejoras de seguridad
+    api_secret = "9eJQvLXs_4A6l5yFROESQnQe6uA",
+)

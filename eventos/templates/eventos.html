@@ -2,14 +2,19 @@
 <h1>Eventos</h1>
 
 <ul>
-    {% for Evento in eventos %}
+    {% for evento in eventos %}
     <li>
-        <h1>{{Evento.tipo_de_evento}}</h1>
-        <p>{{Evento.valor_referencial}}</p>
-        <p>{{Evento.numero_horas_permitidas}}</p>
+        <h2>{{ evento.titulo_evento }}</h2>
+        <p>Tipo de Evento: {{ evento.tipo_de_evento.nombre_evento }}</p>
+        <p>Valor Referencial: {{ evento.valor_referencial }}</p>
+        <p>Horas Permitidas: {{ evento.numero_horas_permitidas }}</p>
+        {% if evento.tipo_de_evento.imagen %}
+        <img src="{{ evento.tipo_de_evento.imagen.url }}" alt="{{ evento.tipo_de_evento.nombre_evento }}" style="width: 200px; height: auto;">
+        {% else %}
+        <p>No hay imagen disponible para este tipo de evento.</p>
+        {% endif %}
     </li>
     {% endfor %}
 </ul>
-
 
 {% endblock %}

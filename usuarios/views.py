@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.conf import settings
 from django.utils.crypto import get_random_string
@@ -103,3 +104,7 @@ def login_view(request):
 def cerrar_sesion (request):
     logout(request)
     return redirect ('home')
+
+@login_required
+def profile_user(request):
+    return render (request, "perfil.html", {"Usuario": request.user})
