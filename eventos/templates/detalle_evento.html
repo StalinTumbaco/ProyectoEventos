@@ -1,0 +1,21 @@
+{% block content %}
+<h1>{{ evento.titulo_evento }}</h1>
+
+<p><strong>Descripción:</strong> {{ evento.descripcion }}</p>
+<p><strong>Tipo de Evento:</strong> {{ evento.tipo_de_evento.nombre_evento }}</p>
+<p><strong>Valor Referencial:</strong> {{ evento.valor_referencial }}</p>
+<p><strong>Horas Permitidas:</strong> {{ evento.numero_horas_permitidas }}</p>
+<p><strong>Valor Extra por Hora:</strong> {{ evento.valor_extra_hora }}</p>
+
+{% if evento.tipo_de_evento.imagen %}
+<img src="{{ evento.tipo_de_evento.imagen.url }}" alt="{{ evento.tipo_de_evento.nombre_evento }}" style="width: 300px; height: auto;">
+{% endif %}
+
+<a href="{% url 'eventos' %}">Regresar a la lista de eventos</a>
+
+<form method="POST" action="{% url 'alquilar_evento' evento.idevento %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary">Alquilar Evento</button>
+</form>
+
+{% endblock %}

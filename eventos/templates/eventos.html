@@ -4,7 +4,7 @@
 <ul>
     {% for evento in eventos %}
     <li>
-        <h2>{{ evento.titulo_evento }}</h2>
+        <h2><a href="{% url 'detalle_evento' evento.idevento %}">{{ evento.titulo_evento }}</a></h2>
         <p>Tipo de Evento: {{ evento.tipo_de_evento.nombre_evento }}</p>
         <p>Valor Referencial: {{ evento.valor_referencial }}</p>
         <p>Horas Permitidas: {{ evento.numero_horas_permitidas }}</p>

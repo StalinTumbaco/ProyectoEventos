@@ -20,6 +20,24 @@
         </div>
         <div class="col-md-8">
             <!-- CARD Variable -->
+            <div class="card border rounded-2 shadow p-3 mb-3">
+                <div class="card-body">
+                    <h3>Tus Eventos Alquilados</h3>
+                    <ul>
+                        {% for alquiler in Usuario.alquiler_set.all %}
+                        <li>
+                            <h5>{{ alquiler.evento.titulo_evento }}</h5>
+                            <p>{{ alquiler.evento.descripcion }}</p>
+                            <form method="POST" action="{% url 'cancelar_alquiler' alquiler.idalquiler %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger btn-sm">Cancelar Alquiler</button>
+                            </form>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            
         </div>
     </div>
 </div>

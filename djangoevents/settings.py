@@ -155,9 +155,9 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'  # Cambia según el proveedor
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = ''  # Tu correo electrónico
-EMAIL_HOST_PASSWORD = ''  # Tu contraseña de aplicaciones
-DEFAULT_FROM_EMAIL = ''
+EMAIL_HOST_USER = 'spaceeventspagweb@gmail.com'  # Tu correo electrónico
+EMAIL_HOST_PASSWORD = 'hprz lesc ntjp njis'  # Tu contraseña de aplicaciones
+DEFAULT_FROM_EMAIL = 'spaceeventspagweb@gmail.com'
 
 #Jazzmin para el admin
 JAZZMIN_SETTINGS = {
@@ -168,7 +168,7 @@ JAZZMIN_SETTINGS = {
 
 #Configuracion de Cloudinary
 cloudinary.config(
-    cloud_name = "",
-    api_key = "",            #abierto a mejoras de seguridad
-    api_secret = "",
+    cloud_name = "imagecloudlkr",
+    api_key = "959667655699661",            #abierto a mejoras de seguridad
+    api_secret = "9eJQvLXs_4A6l5yFROESQnQe6uA",
 )
