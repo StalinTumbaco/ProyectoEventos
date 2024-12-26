@@ -30,6 +30,7 @@
                         <li>
                             <h5>{{ alquiler.evento.titulo_evento }}</h5>
                             <p>{{ alquiler.evento.descripcion }}</p>
+                            <p>{{ alquiler.costo_alquiler }} <strong>USD</strong></p>
                             <form method="POST" action="{% url 'cancelar_alquiler' alquiler.idalquiler %}">
                                 {% csrf_token %}
                                 <button type="submit" class="btn btn-danger btn-sm">Cancelar Alquiler</button>

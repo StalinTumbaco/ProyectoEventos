@@ -13,7 +13,7 @@ class Alquiler(models.Model):
     horainicio_planificada_reserva = models.TimeField()
     horafin_planificada_reserva = models.TimeField()
     horafin_real_reserva = models.TimeField(blank=True, null=True)
-    costo_alquiler = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0.01)])
+    costo_alquiler = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0.01)], default=0.0)
     calificacion_negocio = models.PositiveIntegerField(blank=True, null=True, validators=[MinValueValidator(1), MaxValueValidator(5)])
     observacion = models.TextField(blank=True, null=True)
     cantidad_anticipo = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True, validators=[MinValueValidator(0.01)])
