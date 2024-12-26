@@ -108,3 +108,17 @@ def cerrar_sesion (request):
 @login_required
 def profile_user(request):
     return render (request, "perfil.html", {"Usuario": request.user})
+
+@login_required
+def actualizar_perfil(request):
+    if request.method == 'POST':
+        usuario = request.user
+        usuario.username = request.POST.get('username', usuario.username)
+        usuario.first_name = request.POST.get('first_name', usuario.first_name)
+        usuario.last_name = request.POST.get('last_name', usuario.last_name)
+        usuario.nacionalidad = request.POST.get('nacionalidad', usuario.nacionalidad)
+        usuario.telefono = request.POST.get('telefono', usuario.telefono)
+        usuario.save()
+        messages.success(request, 'Tu perfil ha sido actualizado correctamente.')
+        return redirect('perfil_usuario')  # Redirige a la página del perfil
+    return redirect('perfil_usuario')  # Evita accesos no permitidos
