@@ -4,9 +4,22 @@
 <ul>
     {% for Servicio in servicios %}
     <li>
-        <h1>{{Servicio.descripcion_servicio}}</h1>
+        <h1><a href="{% url 'detalle_servicio' Servicio.idservicio %}">{{Servicio.Nombre_servicio}}</a></h1>
         <p>{{Servicio.valor_unidad}}</p>
         <p>{{Servicio.estado_servicio}}</p>
+
+        <h3>Imágenes:</h3>
+        <ul>
+            {% for foto in Servicio.fotoservicio_set.all %}
+            <li>
+                <img src="{{ foto.imagen.url }}" alt="Foto del servicio" style="width: 200px; height: auto;">
+                <p>{{ foto.descripcion_foto }}</p>
+            </li>
+            {% empty %}
+            <li><p>No hay imágenes para este servicio.</p></li>
+            {% endfor %}
+        </ul>
+
     </li>
     {% endfor %}
 </ul>

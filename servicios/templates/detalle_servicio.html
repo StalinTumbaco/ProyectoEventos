@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Detalle del Servicio</h1>
+
+<div>
+    <h2>{{ servicio.Nombre_servicio }}</h2>
+    <p><strong>Descripción:</strong> {{ servicio.descripcion_servicio }}</p>
+    <p><strong>Precio por unidad:</strong> {{ servicio.valor_unidad }}</p>
+    <p><strong>Estado:</strong> {{ servicio.estado_servicio }}</p>
+    <p><strong>Descripción de la unidad:</strong> {{ servicio.descripcion_unidad }}</p>
+
+    <h3>Fotos relacionadas:</h3>
+    <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+        {% for foto in servicio.fotoservicio_set.all %}
+        <div>
+            <img src="{{ foto.imagen.url }}" alt="Foto relacionada" style="width: 200px; height: auto;">
+            <p>{{ foto.descripcion_foto }}</p>
+        </div>
+        {% empty %}
+        <p>No hay fotos asociadas a este servicio.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
