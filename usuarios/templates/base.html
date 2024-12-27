@@ -9,22 +9,46 @@
 </head>
 <body>
 
-    <nav>
-        <ul>
-            {% if not user.is_authenticated %}
-            <li>
-                <a href="/usuarios/login">Iniciar sesion</a>
-            </li>
-            <li>
-                <a href="/usuarios/registro">Registrarse</a>
-            </li>
-            {% else %}
-            <li>
-                <a href="/usuarios/logout">Cerrar sesion</a>
-            </li>
-            {% endif %}
-        </ul>
-    </nav>
+    <nav class="navbar navbar-expand-lg" style="background-color: #7bf17f;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'home' %}">SpaceEvents</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <!-- Opciones alineadas a la izquierda -->
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+                    </li>
+                    {% if not user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/usuarios/login">Iniciar Sesion</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/usuarios/registro">Registrarse</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" aria-disabled="true" href="{% url 'eventos' %}">Eventos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-disabled="true" href="{% url 'servicios' %}">Servicios</a>
+                    </li>
+                </ul>
+                <!-- Opciones alineadas a la derecha -->
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-disabled="true" href="{% url 'perfil_usuario' %}">Mi Perfil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-disabled="true" href="/usuarios/logout">Cerrar sesion</a>
+                    </li>
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+      </nav>
 
     {% block content %}
     {% endblock %}
