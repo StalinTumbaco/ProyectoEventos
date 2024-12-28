@@ -3,9 +3,10 @@ from django.contrib.auth.decorators import login_required
 from django.utils.timezone import now
 from datetime import datetime, timedelta
 from decimal import Decimal
-from .models import Alquiler
+from .models import Alquiler, AlquilerServicio
 from eventos.models import Evento
-from .forms import AlquilerForm
+from servicios.models import Servicio
+from .forms import AlquilerForm, AlquilerServicioForm
 
 #Create your views here.
 
@@ -45,4 +46,24 @@ def alquilar_evento(request, evento_id):
 def cancelar_alquiler(request, alquiler_id):
     alquiler = get_object_or_404(Alquiler, pk=alquiler_id, cliente=request.user)
     alquiler.delete()
+    return redirect('perfil_usuario')
+
+@login_required
+def alquilar_servicio(request, idservicio):
+    servicio = get_object_or_404(Servicio, idservicio=idservicio)
+    if request.method == 'POST':
+        form = AlquilerServicioForm(request.POST)
+        if form.is_valid():
+            alquiler_servicio = form.save(commit=False)
+            alquiler_servicio.alquiler.cliente = request.user
+            alquiler_servicio.save()
+            return redirect('perfil_usuario')
+    else:
+        form = AlquilerServicioForm()
+    return render(request, 'alquilar_servicio.html', {'form': form, 'servicio': servicio})
+
+@login_required
+def cancelar_alquiler_servicio(request, idalquiler_servicio):
+    alquiler_servicio = get_object_or_404(AlquilerServicio, pk=idalquiler_servicio, cliente=request.user)
+    alquiler_servicio.delete()
     return redirect('perfil_usuario')

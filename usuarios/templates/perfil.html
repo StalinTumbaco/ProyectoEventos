@@ -40,6 +40,23 @@
                     </ul>
                 </div>
             </div>
+            <div class="card border rounded-2 shadow p-3 mb-3">
+                <div class="card-body">
+                    <h3>Tus Servicios Alquilados</h3>
+                    <ul>
+                        {% for alquiler_servicio in Usuario.alquilerservicio_set.all %}
+                        <li>
+                            <h5>{{ alquiler_servicio.servicio.Nombre_servicio }}</h5>
+                            <p>Cantidad: {{ alquiler_servicio.cantidad }}</p>
+                            <form method="POST" action="{% url 'cancelar_alquiler_servicio' alquiler_servicio.idalquiler_servicio %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger btn-sm">Cancelar Servicio</button>
+                            </form>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>            
         </div>
     </div>
 </div>

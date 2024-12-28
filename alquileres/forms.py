@@ -1,9 +1,6 @@
-from django.forms import ModelForm, DateField, DateInput, TimeField, TimeInput
+from django.forms import ModelForm, DateField, DateInput, TimeField, TimeInput, NumberInput
 from .models import * 
 from datetime import date, time
-
-
-
 
 class AlquilerForm(ModelForm):
     class Meta:
@@ -47,3 +44,11 @@ class AlquilerForm(ModelForm):
                     )
 
         return cleaned_data
+
+class AlquilerServicioForm(ModelForm):
+    class Meta:
+        model = AlquilerServicio
+        fields = ['alquiler','servicio', 'cantidad']
+        widgets = {
+            'cantidad': NumberInput(attrs={'min': 1}),
+        }
