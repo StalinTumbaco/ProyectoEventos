@@ -55,7 +55,7 @@ def alquilar_servicio(request, idservicio):
         form = AlquilerServicioForm(request.POST)
         if form.is_valid():
             alquiler_servicio = form.save(commit=False)
-            alquiler_servicio.alquiler.cliente = request.user
+            alquiler_servicio.cliente = request.user
             alquiler_servicio.save()
             return redirect('perfil_usuario')
     else:

@@ -95,6 +95,8 @@ def login_view(request):
 
         if usuario is not None:
             login(request, usuario)
+            if usuario.is_superuser or usuario.is_staff:
+                return redirect('/admin/')
             return redirect('home')  # Cambia 'home' a la URL que corresponda
         else:
             messages.error(request, 'Nombre de usuario, correo o contraseña incorrectos.')
@@ -122,3 +124,63 @@ def actualizar_perfil(request):
         messages.success(request, 'Tu perfil ha sido actualizado correctamente.')
         return redirect('perfil_usuario')  # Redirige a la página del perfil
     return redirect('perfil_usuario')  # Evita accesos no permitidos
+
+def recuperar_contrasena(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        try:
+            user = Usuario.objects.get(email=email)
+            verification_code = get_random_string(length=6, allowed_chars='0123456789')
+            
+            # Guardar el código en caché con un tiempo de expiración
+            cache.set(f'password_reset_code_{user.username}', verification_code, timeout=600)  # 10 minutos
+
+            # Enviar el código por correo
+            send_mail(
+                'Recuperación de Contraseña',
+                f'Tu código de verificación para recuperar tu contraseña es: {verification_code}',
+                settings.DEFAULT_FROM_EMAIL,
+                [email],
+                fail_silently=False,
+            )
+            
+            return redirect('verificar_codigo_reset', username=user.username)
+        except Usuario.DoesNotExist:
+            messages.error(request, 'El correo electrónico ingresado no está registrado.')
+    
+    return render(request, 'recuperar_contrasena.html')
+
+def verificar_codigo_reset(request, username):
+    if request.method == 'POST':
+        input_code = request.POST.get('codigo')
+        saved_code = cache.get(f'password_reset_code_{username}')
+        
+        if saved_code and input_code == saved_code:
+            return redirect('resetear_contrasena', username=username)
+        else:
+            messages.error(request, 'Código inválido o expirado.')
+    
+    return render(request, 'verificar_codigo_reset.html')
+
+def resetear_contrasena(request, username):
+    if request.method == 'POST':
+        new_password = request.POST.get('new_password')
+        confirm_password = request.POST.get('confirm_password')
+        
+        if new_password == confirm_password:
+            try:
+                user = Usuario.objects.get(username=username)
+                user.set_password(new_password)
+                user.save()
+                
+                # Eliminar el código de caché
+                cache.delete(f'password_reset_code_{username}')
+                
+                messages.success(request, 'Tu contraseña ha sido actualizada. Ahora puedes iniciar sesión.')
+                return redirect('login')
+            except Usuario.DoesNotExist:
+                messages.error(request, 'Ocurrió un error al actualizar la contraseña.')
+        else:
+            messages.error(request, 'Las contraseñas no coinciden.')
+    
+    return render(request, 'resetear_contrasena.html')

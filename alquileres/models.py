@@ -49,6 +49,7 @@ class FotoAlquiler(models.Model):
 
 class AlquilerServicio(models.Model):
     idalquiler_servicio = models.AutoField(primary_key=True)
+    cliente = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1)
     alquiler = models.ForeignKey(Alquiler, on_delete=models.CASCADE)
     servicio = models.ForeignKey('servicios.Servicio', on_delete=models.CASCADE)
     cantidad = models.PositiveIntegerField(validators=[MinValueValidator(1)])

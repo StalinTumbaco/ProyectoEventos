@@ -30,7 +30,7 @@
                         <li>
                             <h5>{{ alquiler.evento.titulo_evento }}</h5>
                             <p>{{ alquiler.evento.descripcion }}</p>
-                            <p>{{ alquiler.costo_alquiler }} <strong>USD</strong></p>
+                            <p>Costo Total: ${{ alquiler.costo_alquiler }} <strong>USD</strong></p>
                             <form method="POST" action="{% url 'cancelar_alquiler' alquiler.idalquiler %}">
                                 {% csrf_token %}
                                 <button type="submit" class="btn btn-danger btn-sm">Cancelar Alquiler</button>
@@ -46,8 +46,9 @@
                     <ul>
                         {% for alquiler_servicio in Usuario.alquilerservicio_set.all %}
                         <li>
-                            <h5>{{ alquiler_servicio.servicio.Nombre_servicio }}</h5>
+                            <h5>{{ alquiler_alquiler_servicio.servicio.Nombre_servicio }}</h5>
                             <p>Cantidad: {{ alquiler_servicio.cantidad }}</p>
+                            <p>Costo Total: ${{ alquiler_servicio.costo_total }} <strong>USD</strong></p>
                             <form method="POST" action="{% url 'cancelar_alquiler_servicio' alquiler_servicio.idalquiler_servicio %}">
                                 {% csrf_token %}
                                 <button type="submit" class="btn btn-danger btn-sm">Cancelar Servicio</button>
