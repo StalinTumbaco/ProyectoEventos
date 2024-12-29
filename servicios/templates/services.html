@@ -1,29 +1,36 @@
 {% extends 'base.html' %}
+
 {% block content %}
-<h1>Servicios</h1>
+<div class="container py-4">
+    <h1 class="text-center mb-4">Servicios</h1>
 
-<ul>
-    {% for Servicio in servicios %}
-    <li>
-        <h1><a href="{% url 'detalle_servicio' Servicio.idservicio %}">{{Servicio.Nombre_servicio}}</a></h1>
-        <p>{{Servicio.valor_unidad}}</p>
-        <p>{{Servicio.estado_servicio}}</p>
-
-        <h3>Imágenes:</h3>
-        <ul>
-            {% for foto in Servicio.fotoservicio_set.all %}
-            <li>
-                <img src="{{ foto.imagen.url }}" alt="Foto del servicio" style="width: 200px; height: auto;">
-                <p>{{ foto.descripcion_foto }}</p>
-            </li>
-            {% empty %}
-            <li><p>No hay imágenes para este servicio.</p></li>
-            {% endfor %}
-        </ul>
-
-    </li>
-    {% endfor %}
-</ul>
-
-
+    <div class="row">
+        {% for Servicio in servicios %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h2 class="card-title h5">
+                        <a href="{% url 'detalle_servicio' Servicio.idservicio %}" class="text-decoration-none text-primary">
+                            {{ Servicio.Nombre_servicio }}
+                        </a>
+                    </h2>
+                    <p class="card-text"><strong>Precio por unidad:</strong> ${{ Servicio.valor_unidad }}</p>
+                    <p class="card-text"><strong>Estado:</strong> {{ Servicio.estado_servicio }}</p>
+                </div>
+                <div class="card-footer bg-white">
+                    <div class="d-flex flex-wrap gap-2">
+                        {% for foto in Servicio.fotoservicio_set.all %}
+                        <div>
+                            <img src="{{ foto.imagen.url }}" alt="Foto del servicio" class="img-thumbnail" style="width: 100px; height: auto;">
+                        </div>
+                        {% empty %}
+                        <p class="text-muted">No hay imágenes para este servicio.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

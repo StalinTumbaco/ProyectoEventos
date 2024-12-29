@@ -1,19 +1,100 @@
 {% extends 'base.html' %}
+
 {% block content %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro</title>
-</head>
-<body>
-    <h1>Registrarse</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Registrarse</button>
-    </form>
-</body>
-</html>
+<div class="container py-4">
+    <h1 class="text-center mb-4">Registrarse</h1>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form method="post" class="card shadow-sm p-4">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label for="id_username" class="form-label">Nombre de usuario</label>
+                    {{ form.username }}
+                    {% if form.username.errors %}
+                        <div class="text-danger">{{ form.username.errors|join:"<br>" }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    <label for="id_first_name" class="form-label">Nombre</label>
+                    {{ form.first_name }}
+                    {% if form.first_name.errors %}
+                        <div class="text-danger">{{ form.first_name.errors|join:"<br>" }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    <label for="id_last_name" class="form-label">Apellido</label>
+                    {{ form.last_name }}
+                    {% if form.last_name.errors %}
+                        <div class="text-danger">{{ form.last_name.errors|join:"<br>" }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    <label for="id_identificacion_cliente" class="form-label">Identificación</label>
+                    {{ form.identificacion_cliente }}
+                    {% if form.identificacion_cliente.errors %}
+                        <div class="text-danger">{{ form.identificacion_cliente.errors|join:"<br>" }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    <label for="id_telefono" class="form-label">Teléfono</label>
+                    {{ form.telefono }}
+                    {% if form.telefono.errors %}
+                        <div class="text-danger">{{ form.telefono.errors|join:"<br>" }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    <label for="id_email" class="form-label">Correo electrónico</label>
+                    {{ form.email }}
+                    {% if form.email.errors %}
+                        <div class="text-danger">{{ form.email.errors|join:"<br>" }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    <label for="id_nacionalidad" class="form-label">Nacionalidad</label>
+                    {{ form.nacionalidad }}
+                    {% if form.nacionalidad.errors %}
+                        <div class="text-danger">{{ form.nacionalidad.errors|join:"<br>" }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    <label for="id_genero" class="form-label">Género</label>
+                    {{ form.genero }}
+                    {% if form.genero.errors %}
+                        <div class="text-danger">{{ form.genero.errors|join:"<br>" }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    <label for="id_password1" class="form-label">Contraseña</label>
+                    {{ form.password1 }}
+                    {% if form.password1.errors %}
+                        <div class="text-danger">{{ form.password1.errors|join:"<br>" }}</div>
+                    {% endif %}
+                    {% if form.password1.help_text %}
+                        <div class="form-text">{{ form.password1.help_text }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    <label for="id_password2" class="form-label">Confirmar Contraseña</label>
+                    {{ form.password2 }}
+                    {% if form.password2.errors %}
+                        <div class="text-danger">{{ form.password2.errors|join:"<br>" }}</div>
+                    {% endif %}
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Registrarse</button>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}

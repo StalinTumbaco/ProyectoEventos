@@ -1,31 +1,44 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Detalle del Servicio</h1>
+<div class="container py-4">
+    <h1 class="mb-4 text-center">Detalle del Servicio</h1>
 
-<div>
-    <h2>{{ servicio.Nombre_servicio }}</h2>
-    <p><strong>Descripción:</strong> {{ servicio.descripcion_servicio }}</p>
-    <p><strong>Precio por unidad:</strong> {{ servicio.valor_unidad }}</p>
-    <p><strong>Estado:</strong> {{ servicio.estado_servicio }}</p>
-    <p><strong>Descripción de la unidad:</strong> {{ servicio.descripcion_unidad }}</p>
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <h2 class="card-title">{{ servicio.Nombre_servicio }}</h2>
+            <p class="card-text"><strong>Descripción:</strong> {{ servicio.descripcion_servicio }}</p>
+            <p class="card-text"><strong>Precio por unidad:</strong> ${{ servicio.valor_unidad }}</p>
+            <p class="card-text"><strong>Estado:</strong> {{ servicio.estado_servicio }}</p>
+            <p class="card-text"><strong>Descripción de la unidad:</strong> {{ servicio.descripcion_unidad }}</p>
+        </div>
+    </div>
 
-    <h3>Fotos relacionadas:</h3>
-    <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+    <h3 class="mb-3">Foto Del servicio:</h3>
+    <div class="row">
         {% for foto in servicio.fotoservicio_set.all %}
-        <div>
-            <img src="{{ foto.imagen.url }}" alt="Foto relacionada" style="width: 200px; height: auto;">
-            <p>{{ foto.descripcion_foto }}</p>
+        <div class="col-md-4 col-sm-6 mb-4">
+            <div class="card h-100">
+                <img src="{{ foto.imagen.url }}" alt="Foto relacionada" class="card-img-top" style="max-height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <p class="card-text text-center">{{ foto.descripcion_foto }}</p>
+                </div>
+            </div>
         </div>
         {% empty %}
-        <p>No hay fotos asociadas a este servicio.</p>
+        <div class="col-12">
+            <p class="text-muted text-center">No hay fotos asociadas a este servicio.</p>
+        </div>
         {% endfor %}
     </div>
-    <a href="{% url 'servicios' %}">Regresar a la lista de servicios</a>
 
-    <form method="POST" action="{% url 'alquilar_servicio' servicio.idservicio %}">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-primary">Alquilar Servicio</button>
-    </form>
+    <div class="d-flex justify-content-between align-items-center">
+        <a href="{% url 'servicios' %}" class="btn btn-secondary">Regresar a la lista de servicios</a>
+
+        <form method="POST" action="{% url 'alquilar_servicio' servicio.idservicio %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Alquilar Servicio</button>
+        </form>
+    </div>
 </div>
 {% endblock %}
