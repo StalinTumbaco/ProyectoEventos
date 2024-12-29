@@ -1,15 +1,89 @@
 {% extends 'base.html' %}
 {% block content %}
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>SpaceEvents - Inicio</title>
 </head>
 <body>
-    <h1>Bienvenido a la Página de Inicio</h1>
-    <p>Esta es la página de inicio del proyecto.</p>
+    <!-- Imagen de portada -->
+    <div class="position-relative text-center text-white" style="height: 50vh; background-image: url('{% static 'imagenes/portada.jpg' %}'); background-size: cover; background-position: center;">
+        <div class="position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(0, 0, 0, 0.5);"></div>
+        <div class="position-relative z-1 d-flex flex-column justify-content-center align-items-center h-100">
+            <h1 class="display-4 fw-bold">SpaceEvents</h1>
+            <p class="lead">Te acompañamos en tus mejores momentos</p>
+        </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="container py-5">
+        <h2 class="text-center mb-4">Bienvenido a SpaceEvents</h2>
+        <p class="text-center">
+            SpaceEvents es mucho más que una empresa de organización de eventos; somos tus aliados en la creación de recuerdos inolvidables. 
+            Nos especializamos en transformar tus ideas en experiencias únicas y emocionantes. Ya sea una boda de ensueño, 
+            un cumpleaños especial, una reunión corporativa o cualquier otro tipo de evento, estamos aquí para ayudarte a hacer realidad tus deseos.
+        </p>
+        <p class="text-center">
+            Contamos con un equipo apasionado, comprometido y altamente calificado que garantiza que cada detalle sea perfecto.
+            Desde la planificación inicial hasta la ejecución final, en SpaceEvents nos aseguramos de que tu evento sea un éxito rotundo.
+            Creemos que cada celebración cuenta una historia, y nuestra misión es hacer que la tuya sea memorable.
+        </p>
+
+        <div class="row mt-5">
+            <!-- Tarjeta de Eventos -->
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="overflow-hidden" style="height: 300px;">
+                        <img src="{% static 'imagenes/informativohome.jpg' %}" class="card-img-top img-fluid" alt="Eventos">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Eventos</h5>
+                        <p class="card-text">
+                            Descubre nuestra amplia gama de eventos personalizados, desde bodas hasta reuniones profesionales.
+                            Hacemos realidad tus sueños y convertimos tus ideas en momentos inolvidables.
+                        </p>
+                        <a href="{% url 'eventos' %}" class="btn btn-primary">Ver más</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tarjeta de Servicios -->
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="overflow-hidden" style="height: 300px;">
+                        <img src="{% static 'imagenes/servicio.jpg' %}" class="card-img-top img-fluid" alt="Servicios">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Servicios</h5>
+                        <p class="card-text">
+                            Ofrecemos servicios de alta calidad para garantizar que cada detalle de tu evento sea perfecto.
+                            Desde decoración hasta catering, contamos con todo lo necesario para sorprenderte.
+                        </p>
+                        <a href="{% url 'servicios' %}" class="btn btn-primary">Ver más</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ¿Quiénes somos? -->
+    <div class="container-fluid py-5 text-white" style="background-color: rgb(0, 0, 0);">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="text-center mb-4">¿Quiénes somos?</h2>
+                <p class="text-center">
+                    En SpaceEvents somos una empresa orgullosamente ecuatoriana, ubicada en el corazón de Manta, Manabí. Nuestra pasión por los eventos y nuestro compromiso con la excelencia nos han convertido en referentes en la región. 
+                    Creemos que cada cliente merece un servicio personalizado y adaptado a sus necesidades, y es por eso que trabajamos incansablemente para superar tus expectativas.
+                </p>
+                <p class="text-center">
+                    Inspirados por la belleza de nuestra tierra y la calidez de nuestra gente, diseñamos eventos que reflejan el espíritu vibrante y alegre de nuestra comunidad. Desde eventos íntimos hasta grandes celebraciones, SpaceEvents está aquí para hacer que cada momento sea único e inolvidable.
+                </p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
 {% endblock %}

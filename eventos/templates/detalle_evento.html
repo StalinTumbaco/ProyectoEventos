@@ -1,22 +1,29 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>{{ evento.titulo_evento }}</h1>
+<div class="container py-4">
+    <h1 class="text-center mb-4">{{ evento.titulo_evento }}</h1>
 
-<p><strong>Descripción:</strong> {{ evento.descripcion }}</p>
-<p><strong>Tipo de Evento:</strong> {{ evento.tipo_de_evento.nombre_evento }}</p>
-<p><strong>Valor Referencial:</strong> {{ evento.valor_referencial }}</p>
-<p><strong>Horas Permitidas:</strong> {{ evento.numero_horas_permitidas }}</p>
-<p><strong>Valor Extra por Hora:</strong> {{ evento.valor_extra_hora }}</p>
+    <div class="card shadow-sm p-4">
+        <p><strong>Descripción:</strong> {{ evento.descripcion }}</p>
+        <p><strong>Tipo de Evento:</strong> {{ evento.tipo_de_evento.nombre_evento }}</p>
+        <p><strong>Valor Referencial:</strong> ${{ evento.valor_referencial }}</p>
+        <p><strong>Horas Permitidas:</strong> {{ evento.numero_horas_permitidas }}</p>
+        <p><strong>Valor Extra por Hora:</strong> ${{ evento.valor_extra_hora }}</p>
 
-{% if evento.tipo_de_evento.imagen %}
-<img src="{{ evento.tipo_de_evento.imagen.url }}" alt="{{ evento.tipo_de_evento.nombre_evento }}" style="width: 300px; height: auto;">
-{% endif %}
+        {% if evento.tipo_de_evento.imagen %}
+        <div class="text-center my-4">
+            <img src="{{ evento.tipo_de_evento.imagen.url }}" alt="{{ evento.tipo_de_evento.nombre_evento }}" class="img-fluid rounded" style="max-width: 300px;">
+        </div>
+        {% endif %}
 
-<a href="{% url 'eventos' %}">Regresar a la lista de eventos</a>
-
-<form method="POST" action="{% url 'alquilar_evento' evento.idevento %}">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-primary">Alquilar Evento</button>
-</form>
-
+        <div class="d-flex justify-content-between mt-4">
+            <a href="{% url 'eventos' %}" class="btn btn-secondary">Regresar a la lista de eventos</a>
+            <form method="POST" action="{% url 'alquilar_evento' evento.idevento %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Alquilar Evento</button>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}
+

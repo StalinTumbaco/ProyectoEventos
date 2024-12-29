@@ -10,9 +10,15 @@
             <div class="card shadow-sm h-100">
                 <div class="card-body">
                     <h2 class="card-title h5">
-                        <a href="{% url 'detalle_servicio' Servicio.idservicio %}" class="text-decoration-none text-primary">
-                            {{ Servicio.Nombre_servicio }}
-                        </a>
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'detalle_servicio' Servicio.idservicio %}" class="text-decoration-none text-primary">
+                                {{ Servicio.Nombre_servicio }}
+                            </a>
+                        {% else %}
+                            <a href="{% url 'login' %}?next={% url 'detalle_servicio' Servicio.idservicio %}" class="text-decoration-none text-primary">
+                                {{ Servicio.Nombre_servicio }}
+                            </a>
+                        {% endif %}
                     </h2>
                     <p class="card-text"><strong>Precio por unidad:</strong> ${{ Servicio.valor_unidad }}</p>
                     <p class="card-text"><strong>Estado:</strong> {{ Servicio.estado_servicio }}</p>
