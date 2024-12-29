@@ -100,7 +100,7 @@ WSGI_APPLICATION = 'djangoevents.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(
         # Replace this value with your local database's connection string.
-        default='postgresql://postgres:postgres@localhost:5432/servidor-para-la-app',
+        default='postgresql://servidor_para_la_app_user:B5PJFOH3GQFiQuKQCm5qe6gUShv1gels@dpg-ctorrvbqf0us73aqrghg-a:5432/servidor_para_la_app',
         conn_max_age=600
     )
 }
