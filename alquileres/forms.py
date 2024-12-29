@@ -48,7 +48,15 @@ class AlquilerForm(ModelForm):
 class AlquilerServicioForm(ModelForm):
     class Meta:
         model = AlquilerServicio
-        fields = ['alquiler','servicio', 'cantidad']
+        fields = ['alquiler', 'servicio', 'cantidad']
         widgets = {
             'cantidad': NumberInput(attrs={'min': 1}),
         }
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('alquiler', None)  # Obtén el usuario logueado
+        super(AlquilerServicioForm, self).__init__(*args, **kwargs)
+        
+        if user:
+            # Filtra los alquileres disponibles para el usuario logueado
+            self.fields['alquiler'].queryset = Alquiler.objects.filter(cliente=user, estado_alquiler='pendiente')

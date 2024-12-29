@@ -51,16 +51,29 @@ def cancelar_alquiler(request, alquiler_id):
 @login_required
 def alquilar_servicio(request, idservicio):
     servicio = get_object_or_404(Servicio, idservicio=idservicio)
+
     if request.method == 'POST':
         form = AlquilerServicioForm(request.POST)
         if form.is_valid():
             alquiler_servicio = form.save(commit=False)
             alquiler_servicio.cliente = request.user
+            
+            # Obtener el alquiler seleccionado por el usuario en el formulario
+            alquiler_seleccionado = form.cleaned_data['alquiler']
+            
+            # Verificar que el alquiler sea de este usuario y que el estado sea 'pendiente'
+            if alquiler_seleccionado.cliente != request.user or alquiler_seleccionado.estado_alquiler != 'pendiente':
+                form.add_error('alquiler', 'No puedes asignar un servicio a un alquiler que no es tuyo o que no está pendiente.')
+                return render(request, 'alquilar_servicio.html', {'form': form, 'servicio': servicio})
+            
             alquiler_servicio.save()
             return redirect('perfil_usuario')
     else:
         form = AlquilerServicioForm()
+
     return render(request, 'alquilar_servicio.html', {'form': form, 'servicio': servicio})
+
+
 
 @login_required
 def cancelar_alquiler_servicio(request, idalquiler_servicio):
