@@ -16,7 +16,10 @@ import cloudinary.api
 from cloudinary import CloudinaryImage
 from cloudinary import CloudinaryVideo
 from pathlib import Path
+from dotenv import load_dotenv  # Carga las variables de entorno desde .env
 import os
+
+load_dotenv()  # Carga las variables de entorno desde .env
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,10 +29,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-f!u*j_-3d!hzig2t9&ioq=e2iw62kxgm-n8htkj)@eziq^u_l4'
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "default-secret-key")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DJANGO_DEBUG", "False") == "True"
 
 ALLOWED_HOSTS = []
 
@@ -139,7 +142,7 @@ STATIC_URL = 'static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATICFILES_DIR = [os.path.join(BASE_DIR, 'static')]
 
 MEDIA_URL = '/media/'
 
@@ -161,14 +164,14 @@ DEFAULT_FROM_EMAIL = 'spaceeventspagweb@gmail.com'
 
 #Jazzmin para el admin
 JAZZMIN_SETTINGS = {
-    'site_header' : "Cirx",
+    'site_header' : "SpaceEventsAdmin",
     'site_brand' : "Te acompañamos en tus mejores momentos",
-    'copyright' : "Cirx.com",
+    'copyright' : "SpaceEvents.com",
 }
 
 #Configuracion de Cloudinary
 cloudinary.config(
-    cloud_name = "imagecloudlkr",
-    api_key = "959667655699661",            #abierto a mejoras de seguridad
-    api_secret = "9eJQvLXs_4A6l5yFROESQnQe6uA",
+    cloud_name = os.getenv("CLOUDINARY_CLOUD_NAME"),
+    api_key = os.getenv("CLOUDINARY_API_KEY"),            #abierto a mejoras de seguridad
+    api_secret = os.getenv("CLOUDINARY_API_SECRET")
 )
